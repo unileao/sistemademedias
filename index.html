@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="imagex/png" href="./icon.ico">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cálculo de média</title>
+
+
+    <style>
+        /* Estilos para a modal */
+        .modal {
+            display: none; /* Por padrão, a modal não será exibida */
+            position: fixed; /* Posicionamento fixo para que fique sobreposto */
+            z-index: 1; /* Posicionamento z para ficar sobre tudo */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Adicionando uma barra de rolagem se necessário */
+            background-color: rgba(0, 0, 0, 0.4); /* Fundo preto com transparência */
+        }
+
+        /* Estilos para o conteúdo da modal */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* Centralizando na tela */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center; /* Alinha o texto ao centro */
+        }
+
+        /* Estilos para o botão fechar */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main-calc">
+        <div class="left-calc">
+            <h1>SISTEMA DE MÉDIAS<br>Verifique o status da sua disciplina </h1>
+            <img src="calculator-animate.svg" class="left-img" alt="calculadora">
+        </div>
+    </div>
+
+    <div class="main-calc1">
+        <div class="rigth-calc">
+
+            <div class="card-calc">
+                <h1>Cálculo de média</h1>
+                <div class="textfield">
+
+                    <label for="notaAV1">Nota de AV1</label>
+                    <input type="number" name="notaav1" id="notaav1" placeholder="Nota Av1">
+                </div>
+                <div class="textfield">
+                    <label for="notaAV2">Nota de AV2</label>
+                    <input type="number" name="notaav2" id="notaav2" placeholder="Nota Av2">
+
+
+                </div>
+                <br>
+                <button class="calcular" id="calcular" onclick="media()">CALCULAR</button>
+                <a href="indexavf.html"><button class="calcularavf">CALCULAR AVF</button></a>
+                <br>
+
+                <div class="resultado">
+                    <p id="media"></p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- A modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Conteúdo da modal -->
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <h2></h2>
+            <p id="modalMedia"></p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function media() {
+            var notaav1 = parseFloat(document.getElementById("notaav1").value);
+            var notaav2 = parseFloat(document.getElementById("notaav2").value);
+            document.getElementById("notaav1").value = "";
+            document.getElementById("notaav2").value = "";
+
+            var media = (notaav1 + (notaav2 * 2)) / 3;
+
+            var status;
+            if (media >= 7) {
+                status = ", Parabéns você foi aprovado! ";
+            } else if (media <= 3.9) {
+                status = ", Não obteve aprovação. ";
+            }
+            if (media >= 4 & media < 7) {
+                status = ", Poderá realizar AVF ";
+            }
+
+            var resultado = "Média: " + media.toFixed(2) + status;
+            
+            document.getElementById('modalMedia').innerText = resultado;
+
+            // Exibindo a modal
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        // Função para fechar a modal
+        function fecharModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+    </script>
+
+</body>
+
+</html>
